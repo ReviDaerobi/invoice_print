@@ -6,25 +6,33 @@
     <div class="overflow-y-auto flex-grow">
         <nav class="mt-6 px-4">
             <div class="space-y-2">
-                <a href="/" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('/') ? 'active' : '' }}">
+                <a href="/" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('dashboard*') ? 'active' : '' }}">
                     <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="{{ route('invoice') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('invoices*') ? 'active' : '' }}">
-                    <i class="fas fa-file-invoice w-5 h-5 mr-3"></i>
-                    <span>Invoices</span>
+                <a href="{{ route('produk.index') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('produk*') ? 'active' : '' }}">
+                    <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
+                    <span>Produk</span>
                 </a>
                 <a href="{{ route('costumer') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('customers*') ? 'active' : '' }}">
                     <i class="fas fa-users w-5 h-5 mr-3"></i>
                     <span>Customer</span>
                 </a>
+                <a href="{{ route('costumer') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('quatation*') ? 'active' : '' }}">
+                    <i class="fas fa-users w-5 h-5 mr-3"></i>
+                    <span>Quatation</span>
+                </a>
+                <a href="{{ route('invoice') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('invoices*') ? 'active' : '' }}">
+                    <i class="fas fa-file-invoice w-5 h-5 mr-3"></i>
+                    <span>Invoices</span>
+                </a>
+                <a href="{{ route('PO.index') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('PO*') ? 'active' : '' }}">
+                    <i class="fas fa-users w-5 h-5 mr-3"></i>
+                    <span>Purchase Order</span>
+                </a>
                 <a href="{{ route('deliveryOrders') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('delivery-order*') ? 'active' : '' }}">
                     <i class="fa-solid fa-truck-fast w-5 h-5 mr-3"></i>
                     <span>Delivery Order</span>
-                </a>
-                <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('transactions*') ? 'active' : '' }}">
-                    <i class="fas fa-box w-5 h-5 mr-3"></i>
-                    <span>Transaksi</span>
                 </a>
                 <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('reports*') ? 'active' : '' }}">
                     <i class="fas fa-chart-bar w-5 h-5 mr-3"></i>
@@ -74,13 +82,17 @@
                         <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
                         <span>Dashboard</span>
                     </a>
-                    <a href="{{ route('invoice') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('invoices*') ? 'active' : '' }}">
-                        <i class="fas fa-file-invoice w-5 h-5 mr-3"></i>
-                        <span>Invoices</span>
+                    <a href="{{ route('produk.index') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('/') ? 'active' : '' }}">
+                        <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
+                        <span>Produk</span>
                     </a>
                     <a href="{{ route('costumer') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('customers*') ? 'active' : '' }}">
                         <i class="fas fa-users w-5 h-5 mr-3"></i>
                         <span>Customer</span>
+                    </a>
+                    <a href="{{ route('invoice') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('invoices*') ? 'active' : '' }}">
+                        <i class="fas fa-file-invoice w-5 h-5 mr-3"></i>
+                        <span>Invoices</span>
                     </a>
                     <a href="{{ route('deliveryOrders') }}" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600 {{ request()->is('delivery-order*') ? 'active' : '' }}">
                         <i class="fa-solid fa-truck-fast w-5 h-5 mr-3"></i>

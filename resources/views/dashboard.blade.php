@@ -1,145 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - InvoicePro</title>
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        .sidebar-item.active {
-            background-color: rgba(59, 130, 246, 0.1);
-            border-right: 3px solid #3b82f6;
-            color: #3b82f6;
-        }
-        
-        .bg-dots-light {
-            background-image: radial-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px);
-            background-size: 30px 30px;
-        }
-        
-        .bg-dots-dark {
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 2px);
-            background-size: 30px 30px;
-        }
-    </style>
-</head>
-<body class="bg-gray-50 min-h-screen">
-    <div class="flex h-screen overflow-hidden">
-        <!-- Sidebar -->
-        <div class="bg-white shadow-lg w-64 flex-shrink-0 hidden md:flex flex-col">
-            <div class="flex items-center justify-center h-16 border-b">
-                <h1 class="text-2xl font-bold text-blue-600">InvoicePro</h1>
-            </div>
-            <div class="overflow-y-auto flex-grow">
-                <nav class="mt-6 px-4">
-                    <div class="space-y-2">
-                        <a href="#" class="sidebar-item active flex items-center px-4 py-3 text-blue-600 rounded-lg transition duration-200 hover:bg-blue-50">
-                            <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
-                            <span>Dashboard</span>
-                        </a>
-                        <a href="/invoices" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                            <i class="fas fa-file-invoice w-5 h-5 mr-3"></i>
-                            <span>Invoices</span>
-                        </a>
-                        <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                            <i class="fas fa-users w-5 h-5 mr-3"></i>
-                            <span>Costumer</span>
-                        </a>
-                        <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                            <i class="fas fa-box w-5 h-5 mr-3"></i>
-                            <span>Transaksi</span>
-                        </a>
-                        <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                            <i class="fas fa-chart-bar w-5 h-5 mr-3"></i>
-                            <span>Laporan</span>
-                        </a>
-                        <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                            <i class="fas fa-cog w-5 h-5 mr-3"></i>
-                            <span>Pengaturan</span>
-                        </a>
-                    </div>
-                </nav>
-            </div>
-            <div class="border-t p-4">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold">
-                        {{ substr(Auth::user()->name, 0, 1) }}
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</p>
-                        <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
-                    </div>
-                </div>
-                <form method="POST" action="{{ route('logout') }}" class="mt-4">
-                    @csrf
-                    <button type="submit" class="w-full flex items-center justify-center px-4 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 transition duration-200">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                    </button>
-                </form>
-            </div>
-        </div>
-        
-        <!-- Mobile sidebar & overlay -->
-        <div class="md:hidden" x-data="{ sidebarOpen: false }">
-            <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 z-40 bg-black bg-opacity-50"></div>
-            
-            <div x-show="sidebarOpen" class="fixed inset-y-0 left-0 w-64 z-50 bg-white shadow-lg flex flex-col">
-                <div class="flex items-center justify-between h-16 border-b px-4">
-                    <h1 class="text-xl font-bold text-blue-600">InvoicePro</h1>
-                    <button @click="sidebarOpen = false" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="overflow-y-auto flex-grow">
-                    <nav class="mt-6 px-4">
-                        <div class="space-y-2">
-                            <a href="#" class="sidebar-item active flex items-center px-4 py-3 text-blue-600 rounded-lg transition duration-200 hover:bg-blue-50">
-                                <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
-                                <span>Dashboard</span>
-                            </a>
-                            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                                <i class="fas fa-file-invoice w-5 h-5 mr-3"></i>
-                                <span>Invoices</span>
-                            </a>
-                            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                                <i class="fas fa-users w-5 h-5 mr-3"></i>
-                                <span>Klien</span>
-                            </a>
-                            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                                <i class="fas fa-box w-5 h-5 mr-3"></i>
-                                <span>Produk & Layanan</span>
-                            </a>
-                            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                                <i class="fas fa-chart-bar w-5 h-5 mr-3"></i>
-                                <span>Laporan</span>
-                            </a>
-                            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-gray-600 rounded-lg transition duration-200 hover:bg-blue-50 hover:text-blue-600">
-                                <i class="fas fa-cog w-5 h-5 mr-3"></i>
-                                <span>Pengaturan</span>
-                            </a>
-                        </div>
-                    </nav>
-                </div>
-                <div class="border-t p-4">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold">
-                            {{ substr(Auth::user()->name, 0, 1) }}
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</p>
-                            <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
-                        </div>
-                    </div>
-                    <form method="POST" action="{{ route('logout') }}" class="mt-4">
-                        @csrf
-                        <button type="submit" class="w-full flex items-center justify-center px-4 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 transition duration-200">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
+@extends('layouts.app')
+
+@section('content')
         
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
@@ -184,11 +45,11 @@
                             <p class="mt-2 max-w-lg text-blue-100">
                                 Kelola invoice bisnis Anda dengan mudah. Buat invoice baru, lacak pembayaran, dan lihat laporan di satu tempat.
                             </p>
-                            <div class="mt-6">
+                            {{-- <div class="mt-6">
                                 <a href="/invoices/create" class="inline-flex items-center rounded-lg bg-white px-4 py-2 text-sm font-medium text-blue-600 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <i class="fas fa-plus mr-2"></i> Buat Invoice Baru
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                         
                         <!-- Decorative elements -->
@@ -287,6 +148,33 @@
                             </div>
                             <div class="p-4 sm:p-6">
                                 <div class="space-y-4">
+                                    <a href="/produk/create" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition duration-200">
+                                        <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-box text-purple-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Tambah Produk</h3>
+                                            <p class="text-sm text-gray-500">Tambahkan produk atau layanan</p>
+                                        </div>
+                                    </a>
+                                    <a href="/customers/create" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition duration-200">
+                                        <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-user-plus text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Tambah Klien</h3>
+                                            <p class="text-sm text-gray-500">Tambahkan klien baru</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition duration-200">
+                                        <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-plus text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Tambah Quotation</h3>
+                                            <p class="text-sm text-gray-500">Buat Quotation baru untuk klien</p>
+                                        </div>
+                                    </a>
                                     <a href="/invoices/create" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition duration-200">
                                         <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
                                             <i class="fas fa-plus text-blue-600"></i>
@@ -297,25 +185,7 @@
                                         </div>
                                     </a>
                                     
-                                    <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition duration-200">
-                                        <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mr-3">
-                                            <i class="fas fa-user-plus text-green-600"></i>
-                                        </div>
-                                        <div>
-                                            <h3 class="font-medium text-gray-800">Tambah Klien</h3>
-                                            <p class="text-sm text-gray-500">Tambahkan klien baru</p>
-                                        </div>
-                                    </a>
                                     
-                                    <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition duration-200">
-                                        <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mr-3">
-                                            <i class="fas fa-box text-purple-600"></i>
-                                        </div>
-                                        <div>
-                                            <h3 class="font-medium text-gray-800">Tambah Produk</h3>
-                                            <p class="text-sm text-gray-500">Tambahkan produk atau layanan</p>
-                                        </div>
-                                    </a>
                                     
                                     <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition duration-200">
                                         <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center mr-3">
@@ -337,5 +207,6 @@
     
     <!-- Alpine.js -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-</body>
-</html>
+
+
+@endsection

@@ -14,7 +14,7 @@
                     </div>
                     
                     <div class="flex-1 md:ml-0 md:mr-auto">
-                        <h2 class="text-xl font-semibold text-gray-800">Daftar Customer</h2>
+                        <h2 class="text-xl font-semibold text-gray-800">Daftar Produk</h2>
                     </div>
                     
                     <div class="flex items-center space-x-4">
@@ -41,16 +41,16 @@
                 <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div class="flex flex-col sm:flex-row gap-4">
                         <div class="relative">
-                            <input type="text" placeholder="Cari Customer..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full">
+                            <input type="text" placeholder="Cari Produk..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <i class="fas fa-search text-gray-400"></i>
                             </div>
                         </div>
                         <div class="flex space-x-2">
                             <select class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">Semua Customer</option>
-                                <option value="active">Customer Aktif</option>
-                                <option value="inactive">Customer Tidak Aktif</option>
+                                <option value="">Semua Produk</option>
+                                <option value="active">Produk Aktif</option>
+                                <option value="inactive">Produk Tidak Aktif</option>
                             </select>
                             <select class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Semua Tanggal</option>
@@ -65,34 +65,21 @@
                             <i class="fas fa-download mr-2 text-gray-600"></i>
                             <span>Export</span>
                         </button>
-                        <form action="{{ route('customers.create') }}" method="GET">
+                        <form action="{{ route('ProdukCreate') }}" method="GET">
                             @csrf
                             <button class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
                                 <i class="fas fa-plus mr-2"></i>
-                                <span>Tambah Customer</span>
+                                <span>Tambah Produk</span>
                             </button>
                         </form>
                     </div>
                 </div>
                 
-                @if(session('success'))
-                    <div class="mb-4 bg-green-50 p-4 rounded-md">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <i class="fas fa-check-circle text-green-400"></i>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-green-800">{{ session('success') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-                
-                <!-- Customers Table -->
+                <!-- Produks Table -->
                 <div class="bg-white rounded-xl shadow overflow-hidden">
                     <div class="p-4 sm:p-6 border-b flex justify-between items-center">
-                        <h2 class="text-lg font-semibold text-gray-800">Daftar Customer</h2>
-                        <div class="text-sm text-gray-500">Menampilkan 1-{{ $customers->count() }} dari {{ $customers->count() }} Customer</div>
+                        <h2 class="text-lg font-semibold text-gray-800">Daftar Produk</h2>
+                        <div class="text-sm text-gray-500">Menampilkan 1-{{ $produks->count() }} dari {{ $totalProduk }} Produk</div>
                     </div>
                     
                     <div class="overflow-x-auto">
@@ -103,16 +90,13 @@
                                         ID
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Nama
+                                        Nama Produk
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Alamat
+                                        Unit
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        No. Telepon
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Contact Person
+                                        Harga
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Aksi
@@ -120,42 +104,36 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @forelse($customers as $customer)
+                                @forelse($produks as $produk)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#CUS{{ str_pad($customer->id, 3, '0', STR_PAD_LEFT) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#PRD{{ str_pad($produk->ItemId, 3, '0', STR_PAD_LEFT) }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="h-10 w-10 flex-shrink-0 rounded-full bg-blue-100 flex items-center justify-center">
-                                                <span class="text-sm font-bold">{{ $customer->getInisialAttribute() }}</span>
+                                                <span class="text-sm font-bold">{{ substr($produk->ItemName, 0, 2) }}</span>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">{{ $customer->nama }}</div>
+                                                <div class="text-sm font-medium text-gray-900">{{ $produk->ItemName }}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900">{{ $customer->alamat_1 }}</div>
-                                        @if($customer->alamat_2)
-                                            <div class="text-sm text-gray-500">{{ $customer->alamat_2 }}</div>
-                                        @endif
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $customer->no_telp ?? '-' }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $customer->contact_person ?? '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $produk->Unit }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp {{ number_format($produk->UnitPrice, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div class="flex justify-end space-x-2">
-                                            <form action="{{ route('customers.show', ['id' => $customer->id]) }}" method="GET">
+                                            <form action="{{ route('ProdukDetail', ['id' => $produk->ItemId]) }}" method="GET">
                                                 @csrf
                                                 <button class="text-blue-600 hover:text-blue-900" type="submit">
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                             </form>
-                                            <form action="{{ route('customers.edit', ['id' => $customer->id]) }}" method="GET">
+                                            <form action="{{ route('produk.edit', ['id' => $produk->ItemId]) }}" method="GET">
                                                @csrf 
                                                <button class="text-gray-600 hover:text-gray-900" type="submit">
                                                    <i class="fas fa-edit"></i>
                                                 </button>
                                             </form>
-                                            <form action="{{ route('customers.destroy',['id' => $customer->id]) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus customer ini?');">
+                                            <form action="{{ route('produk.destroy',['id' => $produk->ItemId]) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="text-red-600 hover:text-red-900" type="submit">
@@ -167,8 +145,8 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                        Tidak ada data customer
+                                    <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                        Tidak ada data produk
                                     </td>
                                 </tr>
                                 @endforelse
@@ -181,7 +159,7 @@
                         <div class="flex items-center justify-between">
                             <div class="hidden sm:block">
                                 <p class="text-sm text-gray-700">
-                                    Menampilkan <span class="font-medium">1</span> sampai <span class="font-medium">{{ $customers->count() }}</span> dari <span class="font-medium">{{ $customers->count() }}</span> Customer
+                                    Menampilkan <span class="font-medium">1</span> sampai <span class="font-medium">{{ $produks->count() }}</span> dari <span class="font-medium">{{ $totalProduk }}</span> Produk
                                 </p>
                             </div>
                             <div class="flex-1 flex justify-center sm:justify-end">
@@ -197,6 +175,7 @@
                                     </a>
                                 </nav>
                             </div>
+                     
                         </div>
                     </div>
                 </div>
@@ -206,11 +185,11 @@
                     <div class="bg-white rounded-xl shadow p-6">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
-                                <i class="fas fa-users text-xl"></i>
+                                <i class="fas fa-box text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="text-sm font-medium text-gray-500">Total Customer</h3>
-                                <p class="text-2xl font-bold text-gray-800">{{ $customers->count() }}</p>
+                                <h3 class="text-sm font-medium text-gray-500">Total Produk</h3>
+                                <p class="text-2xl font-bold text-gray-800">{{ $totalProduk }}</p>
                             </div>
                         </div>
                     </div>
@@ -221,8 +200,8 @@
                                 <i class="fas fa-check-circle text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="text-sm font-medium text-gray-500">Customer Aktif</h3>
-                                <p class="text-2xl font-bold text-gray-800">{{ $customers->count() }}</p>
+                                <h3 class="text-sm font-medium text-gray-500">Produk Aktif</h3>
+                                <p class="text-2xl font-bold text-gray-800">{{ $aktivProduk }}</p>
                             </div>
                         </div>
                     </div>
@@ -234,7 +213,7 @@
                             </div>
                             <div>
                                 <h3 class="text-sm font-medium text-gray-500">Baru Bulan Ini</h3>
-                                <p class="text-2xl font-bold text-gray-800">0</p>
+                                <p class="text-2xl font-bold text-gray-800">{{ $produkBulanIni }}</p>
                             </div>
                         </div>
                     </div>
