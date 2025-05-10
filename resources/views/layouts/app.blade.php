@@ -7,6 +7,14 @@
     <title>{{ $title ?? 'InvoicePro' }}</title>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <!-- DataTables CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
+    
     <style>
         .sidebar-item.active {
             background-color: rgba(59, 130, 246, 0.1);
@@ -31,10 +39,15 @@
         @include('components.sidebar')
         
         <!-- Main Content -->
-        @yield('content')
+        <div class="flex-1 overflow-y-auto">
+            @yield('content')
+        </div>
     </div>
     
     <!-- Alpine.js -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    
+    <!-- Stack for page-specific scripts -->
+    @stack('scripts')
 </body>
 </html>

@@ -6,6 +6,7 @@ use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PoController;
 use App\Http\Controllers\produkController;
+use App\Http\Controllers\quatationController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Landing
@@ -65,6 +66,9 @@ Route::middleware('auth')->group(function () {
 
     // po
     Route::resource('PO', PoController::class);
+    
+    // another route
+    Route::resource('quatation', quatationController::class);
     
     // another route
 });
