@@ -243,7 +243,7 @@ class quatationController extends Controller
             
             DB::commit();
             
-            return redirect()->route('penawarans.show', $quatation->id)
+            return redirect()->route('quatation.index', $quatation->id)
                 ->with('success', 'Penawaran berhasil diperbarui.');
                 
         } catch (\Exception $e) {
